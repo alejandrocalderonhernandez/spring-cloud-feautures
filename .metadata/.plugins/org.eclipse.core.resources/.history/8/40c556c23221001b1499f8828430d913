@@ -1,0 +1,10 @@
+package com.example.consumer.rest;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@FeignClient(name = "product")
+@RequestMapping("product")
+public interface ProductClient {
+
+}

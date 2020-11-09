@@ -1,0 +1,5 @@
+server.port=9090
+zuul.routes.consumer.url=http://localhost:8070
+zuul.routes.consumer.path=iva
+zuul.routes.suplier.url=http://localhost:8090
+zuul.routes.suplier.path=product

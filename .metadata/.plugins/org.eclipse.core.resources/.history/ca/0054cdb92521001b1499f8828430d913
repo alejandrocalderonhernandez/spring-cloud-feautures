@@ -1,0 +1,5 @@
+package com.example.suplier.service;
+
+public interface ISimpleService {
+
+}

@@ -1,0 +1,12 @@
+package com.example.suplier.service;
+
+import com.example.suplier.model.Product;
+
+public class ProductService implements ISimpleService {
+
+	@Override
+	public Product getByName(String name) {
+		return null;
+	}
+
+}

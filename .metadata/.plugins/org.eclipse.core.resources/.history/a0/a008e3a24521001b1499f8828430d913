@@ -1,0 +1,3 @@
+server.port=9090
+zuul.routes.product.url=http://localhost:8090
+zuul.routes.iva.url=http://localhost:8090

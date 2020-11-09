@@ -1,0 +1,3 @@
+server.port=9090
+zuul.routes.consumer.url=http://localhost:8090
+zuul.routes.suplier.url=http://localhost:8090

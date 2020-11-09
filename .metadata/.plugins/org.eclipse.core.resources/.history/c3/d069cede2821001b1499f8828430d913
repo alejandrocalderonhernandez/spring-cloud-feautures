@@ -1,0 +1,16 @@
+package com.example.suplier.service;
+
+import com.example.suplier.model.Product;
+import com.example.suplier.util.Database;
+
+public class ProductService implements ISimpleService {
+
+	@Override
+	public Product getByName(String name) {
+		if (!Database.listOfProducts.contains(name)) {
+			return null;
+		}
+	
+	}
+
+}

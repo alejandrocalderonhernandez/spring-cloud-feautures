@@ -1,4 +1,0 @@
-server.port=8090
-spring.application.name=suplier
-eureka.client.service-url.defaultZone=http://eureka-service:8761/eureka/
-eureka.instance.instance-id= {spring.application.name}:${spring.application.instance_id:${random.value}}

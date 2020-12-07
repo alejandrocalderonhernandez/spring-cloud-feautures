@@ -1,6 +1,0 @@
-server.port=8090
-spring.application.name=suplier
-eureka.instance.instance-id= {spring.application.name}:${spring.application.instance_id:${random.value}}
-ribbon.eureka.enabled=false
-eureka.client.register-with-eureka=false
-eureka.client.fetch-registry=false

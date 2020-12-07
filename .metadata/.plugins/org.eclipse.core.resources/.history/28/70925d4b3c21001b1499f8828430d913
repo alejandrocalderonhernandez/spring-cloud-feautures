@@ -1,3 +1,0 @@
-server.port=8070
-spring.application.name=consumer
-eureka.instance.instance-id= ${spring.application.instance_id:${random.value}}

@@ -1,0 +1,33 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
+
+zuul:
+  routes:
+    consumer:
+      path: /consumer/**
+      service-id: consumer
+    oauth:
+      path: /auth/**
+      sensitive-headers: Cookie,SetCookie
+      service-id: oauth
+    suplier:
+      path: /suplier/**
+      service-id: suplier
+    user:
+      path: /user/**
+      service-id: user
+
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 20000
+#ribbon.ConnectTimeout: 3000
+#ribbon.ReadTimeout: 60000

@@ -35,6 +35,8 @@ public class User implements Serializable {
 	private String name;
 	@Column(name = "last_name")
 	private String lastName;
+	@Column
+	private Boolean enabled;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
@@ -91,6 +93,14 @@ public class User implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public Set<Role> getRoles() {

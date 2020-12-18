@@ -17,7 +17,7 @@ public class ProductController {
 	@Autowired
 	ISimpleService service;
 	
-	@GetMapping(value = "/get/{name}")
+	@GetMapping(value = "/{name}")
 	public ResponseEntity<?> getProduct(@PathVariable String name) {
 		Product response = null;
 		try {

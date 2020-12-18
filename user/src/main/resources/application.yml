@@ -1,0 +1,25 @@
+server:
+  port: 9870
+  
+spring:
+  application:
+    name: user
+  datasource:
+    driver-class-name: org.h2.Driver
+    password: password
+    url: jdbc:h2:mem:testdb
+    username: sa
+        
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
+    
+logging:
+  level:
+    org:
+      hibernate:
+        sql: debug
+

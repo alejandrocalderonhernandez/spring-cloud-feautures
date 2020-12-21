@@ -27,7 +27,15 @@ zuul:
     user:
       path: /user/**
       service-id: user
+      
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+ribbon:
+  ReadTimeout: 60000
+  connection-timeout: 3000
 
-#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 20000
-#ribbon.ConnectTimeout: 3000
-#ribbon.ReadTimeout: 60000

@@ -14,9 +14,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
  
 	private UserDetailsService service;
 	private BCryptPasswordEncoder encoder;
-	
+
 	@Autowired
-	public SecurityConfig(UserDetailsService service, BCryptPasswordEncoder encoder) {
+	public SecurityConfig(UserDetailsService service, 
+			              BCryptPasswordEncoder encoder) {
 		this.service = service;
 		this.encoder = encoder;
 	}
@@ -32,7 +33,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
-	
-	
-	
+
 }

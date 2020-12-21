@@ -2,8 +2,11 @@ package com.example.oauth.configuration;
 
 import java.util.Arrays;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -20,18 +23,21 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 @EnableAuthorizationServer
 public class AuthorizatonServerConfig extends AuthorizationServerConfigurerAdapter {
 	
+	private Environment environment;
 	private BCryptPasswordEncoder encoder;
 	private AuthenticationManager authenticationManager;
 	private TokenStore tokenStore;
 	private JwtAccessTokenConverter jwt;
 	private TokenEnhancer tokenEnhancer;
 	
+	private String clientId;
+	private String clientSecret;
+	
 	@Autowired
-	public AuthorizatonServerConfig(BCryptPasswordEncoder encoder,
-			                        AuthenticationManager authenticationManager,
-			                        TokenStore tokenStore,
-			                        JwtAccessTokenConverter jwt,
-			                        TokenEnhancer tokenEnhancer) {
+	public AuthorizatonServerConfig(Environment environment, BCryptPasswordEncoder encoder,
+			                        AuthenticationManager authenticationManager, TokenStore tokenStore, 
+			                        JwtAccessTokenConverter jwt, TokenEnhancer tokenEnhancer) {
+		this.environment = environment;
 		this.encoder = encoder;
 		this.authenticationManager = authenticationManager;
 		this.tokenStore = tokenStore;
@@ -39,6 +45,12 @@ public class AuthorizatonServerConfig extends AuthorizationServerConfigurerAdapt
 		this.tokenEnhancer = tokenEnhancer;
 	}
 
+	@PostConstruct
+	public void init() {
+		this.clientId = this.environment.getProperty("config.security.oauth.client.id");
+		this.clientSecret = this.environment.getProperty("config.security.oauth.client.secret");
+	}
+	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		security
@@ -50,12 +62,12 @@ public class AuthorizatonServerConfig extends AuthorizationServerConfigurerAdapt
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.
 			inMemory()
-			.withClient("client_test")
-			.secret(encoder.encode("cl13nt_s3cr3t"))
+			.withClient(this.clientId)
+			.secret(encoder.encode(this.clientSecret))
 			.scopes("read", "write")
 			.authorizedGrantTypes("password", "refresh_token")
 			.accessTokenValiditySeconds(3600)
-			.refreshTokenValiditySeconds(3600);
+			.refreshTokenValiditySeconds(7200);
 	}
 
 	@Override

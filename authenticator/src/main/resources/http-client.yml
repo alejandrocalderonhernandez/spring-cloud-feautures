@@ -1,0 +1,12 @@
+auth:
+  url:
+    token: http://192.168.1.87:9090/auth/oauth/token
+  client:
+    id: client_test
+    secret: cl13nt_s3cr3t
+  user:
+    username: master
+    password: admin
+  types:
+    credentials: password
+    refresh: refresh_token

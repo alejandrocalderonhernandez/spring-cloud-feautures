@@ -1,6 +1,6 @@
 auth:
   url:
-    token: http://192.168.1.87:9090/auth/oauth/token
+    token: http://localhost:9090/auth/oauth/token
   client:
     id: client_test
     secret: cl13nt_s3cr3t

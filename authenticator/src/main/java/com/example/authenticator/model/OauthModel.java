@@ -14,7 +14,8 @@ public class OauthModel {
 	@JsonProperty("expires_in")
 	private Long expirate;
 	
-	public OauthModel() {}
+	public OauthModel() {
+	}
 
 	public String getAccesToken() {
 		return accesToken;

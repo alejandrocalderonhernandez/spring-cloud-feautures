@@ -9,7 +9,7 @@ import com.example.user.entity.User;
 @RepositoryRestResource(path = "user")
 public interface UserRepocitory extends CrudRepository<User, Long>{
 
-	@RestResource(path="username")
+	@RestResource(path = "username")
 	public User findByUsername(String username);
-	
+
 }

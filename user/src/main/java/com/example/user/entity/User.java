@@ -37,6 +37,8 @@ public class User implements Serializable {
 	private String lastName;
 	@Column
 	private Boolean enabled;
+	@Column
+	private Integer tries;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
@@ -101,6 +103,18 @@ public class User implements Serializable {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Integer getTries() {
+		return tries;
+	}
+
+	public void setTries(Integer tries) {
+		this.tries = tries;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
 	public Set<Role> getRoles() {

@@ -15,6 +15,7 @@ public class User implements Serializable {
 	private String lastName;
 	private Set<Role> roles;
 	private boolean enabled;
+	private Integer tries;
 	
 	public User() {}
 
@@ -73,13 +74,21 @@ public class User implements Serializable {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
+
 	public boolean isEnabled() {
 		return enabled;
 	}
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Integer getTries() {
+		return tries;
+	}
+
+	public void setTries(Integer tries) {
+		this.tries = tries;
 	}
 
 	@Override

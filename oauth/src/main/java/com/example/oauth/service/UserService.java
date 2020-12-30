@@ -21,7 +21,7 @@ import com.example.oauth.rest.UserClient;
 
 @Service
 @Primary
-public class UserService implements UserDetailsService {
+public class UserService implements UserDetailsService, IUserService{
 	
 	
 	private static final Logger log = LoggerFactory.getLogger(UserService.class);
@@ -44,8 +44,23 @@ public class UserService implements UserDetailsService {
 				true,
 				true,
 				true,
-				this.getAuthorities(userFromDB.getRoles())
-			   );
+				this.getAuthorities(userFromDB.getRoles()));
+	}
+	
+	@Override
+	public User updateUser(User user, Long id) {
+		return this.client.updateUser(user, id);
+	}
+	
+	@Override
+	public User getByUsername(String username) {
+		System.out.println("error: " + username);
+		try {
+			return client.getUserByUsername(username);
+		} catch (Exception e) {
+			System.out.println("error: " + e.toString());
+		}
+		return null;
 	}
 	
 	private Set<GrantedAuthority> getAuthorities(Collection<Role> roles) {

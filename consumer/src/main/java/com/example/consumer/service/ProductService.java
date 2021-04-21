@@ -10,28 +10,35 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 
 import com.example.consumer.model.Product;
+import com.example.consumer.rest.NotifierClient;
 import com.example.consumer.rest.ProductClient;
 
 @Service
 @RefreshScope
 public class ProductService implements ISimpleService {
 	
-	
 	private static final Logger log = LoggerFactory.getLogger(ProductService.class);
 
-	@Autowired
-	ProductClient client;
-	
-    @Value("${product.desc:'Default value'}")
+	ProductClient Productclient;
+	NotifierClient notifierClient;
+
+	@Value("${product.desc:'Default value'}")
 	private String configRepoInfo;
     
     @Value("${product.iva:0.16}")
 	private Double iva;
 
+	@Autowired
+    public ProductService(ProductClient productclient, NotifierClient notifierClient) {
+		Productclient = productclient;
+		this.notifierClient = notifierClient;
+	}
+	
 	@Override
 	public Product getProductWithIva(String name) {
-		Product product = client.getByProductName(name);
+		Product product = Productclient.getByProductName(name);
 		product.setPrice(this.calculateIVA(product.getPrice()));
+		this.notifierClient.sendNotification(product);
 		return product;
 	}
 	

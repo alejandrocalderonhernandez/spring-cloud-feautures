@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.consumer.model.Product;
 import com.example.consumer.service.ISimpleService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 @RequestMapping("iva")
@@ -18,6 +19,7 @@ public class ProductController {
 	ISimpleService service;
 	
 	@GetMapping(value = "/{name}")
+	@HystrixCommand(fallbackMethod = "defaultCircuitBreaker")
 	public ResponseEntity<?> getProduct(@PathVariable String name) {
 		Product response = null;
 		try {
@@ -26,5 +28,9 @@ public class ProductController {
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.notFound().build();
 		}
+	}
+	
+	public ResponseEntity<?> defaultCircuitBreaker(String name) {
+		return ResponseEntity.ok(new Product());
 	}
 }

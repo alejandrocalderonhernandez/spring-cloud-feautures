@@ -1,24 +1,20 @@
 package com.example.suplier.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.suplier.model.Product;
-import com.example.suplier.util.Database;
+import com.example.suplier.repocitory.ProductRepocitory;
 
 @Service
 public class ProductService implements ISimpleService {
 
+	@Autowired
+	ProductRepocitory repocitory;
 	@Override
-	public Product getByName(String name) {
-		Product response = new Product(); 
-		Database.listOfProducts.forEach(product -> {
-			if(product.getName().equals(name)) {
-				response.setName(product.getName());
-				response.setPrice(product.getPrice());
-				response.setAvible(product.isAvible());
-			}
-		});
-		return response;
+	
+	public Product getByName(String name) throws NoSuchFieldException {
+		return repocitory.findById(name).orElseThrow(() -> new NoSuchFieldException());
 	}
 
 }

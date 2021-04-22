@@ -18,7 +18,7 @@ public class ProductController {
 	ISimpleService service;
 	
 	@GetMapping(value = "/{name}")
-	public ResponseEntity<?> getProduct(@PathVariable String name) {
+	public ResponseEntity<?> getProduct(@PathVariable String name) throws NoSuchFieldException {
 		Product response = this.service.getByName(name);
 		return response.getName() == null ?
 				ResponseEntity.notFound().build() :

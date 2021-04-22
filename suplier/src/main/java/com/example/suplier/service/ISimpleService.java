@@ -4,6 +4,6 @@ import com.example.suplier.model.Product;
 
 public interface ISimpleService {
 	
-	public Product getByName(String name);
+	public Product getByName(String name) throws NoSuchFieldException;
 
 }

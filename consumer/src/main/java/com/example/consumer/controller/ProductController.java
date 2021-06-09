@@ -19,7 +19,7 @@ public class ProductController {
 	ISimpleService service;
 	
 	@GetMapping(value = "/{name}")
-	@HystrixCommand(fallbackMethod = "defaultCircuitBreaker")
+	//@HystrixCommand(fallbackMethod = "defaultCircuitBreaker")
 	public ResponseEntity<?> getProduct(@PathVariable String name) {
 		Product response = null;
 		try {

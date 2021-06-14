@@ -17,12 +17,15 @@ import com.example.consumer.rest.ProductClient;
 @Service
 @RefreshScope
 public class ProductService implements ISimpleService {
-	
+	 
 	private static final Logger log = LoggerFactory.getLogger(ProductService.class);
-
+	  
 	private ProductClient productClient;
 	private NotifierClient notifierClient;
 	private KafkaTemplate<String, String> kafkaTemplate;
+	
+	@Value("${kafka.topic.name:'my-topic-test'}")
+	String topic;
 
 	@Value("${product.desc:'Default value'}")
 	private String configRepoInfo;
@@ -43,7 +46,7 @@ public class ProductService implements ISimpleService {
 	@Override
 	public Product getProductWithIva(String name) {
 		try {
-			this.kafkaTemplate.send("my-topic-test", "new item: " + name);
+			this.kafkaTemplate.send(topic, "new item: " + name);
 		} catch (Exception e) {
 			log.error("Kafka error", e);
 		}

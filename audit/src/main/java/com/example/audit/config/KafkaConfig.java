@@ -13,7 +13,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import com.fasterxml.jackson.databind.deser.std.StringDeserializer;
 
 @Configuration
-public class KafkaConf {
+public class KafkaConfig {
 
   @Bean
   public ConsumerFactory<String, Object> consumerFactory(){
